@@ -26,7 +26,7 @@ class PerformanceAgent(BaseAgent):
         prompt = self._build_prompt(chunk)
 
         try:
-            response = await self._llm.generate(prompt, temperature=0.2, max_tokens=800)
+            response = await self._llm.generate(prompt, temperature=0.0, max_tokens=800)
             return self._parse_response(response, chunk)
         except Exception as e:
             logger.error("performance_agent_error", error=str(e), file=chunk.file_path)
@@ -47,19 +47,19 @@ CODE TO REVIEW:
 {code_context}
 ```
 
-Focus on:
-1. **Algorithm complexity** - inefficient algorithms, O(n²) when O(n) possible
-2. **Resource usage** - memory leaks, excessive allocations, large objects
-3. **Database queries** - N+1 queries, missing indexes, inefficient joins
-4. **Loops** - unnecessary iterations, duplicate work in loops
-5. **Caching** - missing caching opportunities, repeated expensive operations
-6. **I/O operations** - blocking I/O, unnecessary file/network operations
+Focus on these performance issues ONLY (skip if none found):
+1. **Algorithm complexity** - O(n²) nested loops when O(n) is possible
+2. **Redundant operations** - repeated calculations inside loops
+3. **Inefficient data structures** - using lists when sets/dicts would be faster
+4. **Memory waste** - creating unnecessary copies of large data structures
+
+BE CONSISTENT: Always return the same issues for the same code. Do not be creative or change your analysis between runs.
 
 For each issue found, return a JSON array with this exact structure:
 [
   {{
     "line": <line_number_relative_to_chunk>,
-    "severity": "warning" | "info",
+    "severity": "warning",
     "message": "<clear description of the performance issue>",
     "suggestion": "<specific optimization recommendation>"
   }}
@@ -67,7 +67,7 @@ For each issue found, return a JSON array with this exact structure:
 
 If no issues found, return: []
 
-IMPORTANT: Return ONLY valid JSON, no markdown, no explanations."""
+IMPORTANT: Return ONLY valid JSON, no markdown formatting, no explanations, no code blocks."""
 
         return prompt
 

@@ -105,7 +105,7 @@ This document tracks all items from the external review feedback and ensures the
    - **Focus on:** Testing checklist, demo script, known limitations
 
 4. **.docs/VALIDATION_REPORT.md** (RECOMMENDED - ~10 min)
-   - Formal validation against Lyzr challenge requirements
+   - Formal validation of core functionality
    - Evidence of multi-agent architecture
    - Feature completion status
    - Performance metrics

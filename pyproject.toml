@@ -1,5 +1,5 @@
 [project]
-name = "lyzer-pr-review"
+name = "code-review-agent"
 version = "0.1.0"
 description = "Automated GitHub PR Review Agent with Multi-Agent LLM System"
 readme = "README.md"

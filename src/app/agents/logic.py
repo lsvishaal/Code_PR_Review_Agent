@@ -34,7 +34,7 @@ class LogicAgent(BaseAgent):
         prompt = self._build_prompt(chunk)
 
         try:
-            response = await self._llm.generate(prompt, temperature=0.3, max_tokens=800)
+            response = await self._llm.generate(prompt, temperature=0.0, max_tokens=800)
             return self._parse_response(response, chunk)
         except Exception as e:
             logger.error("logic_agent_error", error=str(e), file=chunk.file_path)
@@ -55,19 +55,20 @@ CODE TO REVIEW:
 {code_context}
 ```
 
-Focus on:
-1. **Off-by-one errors** in loops and array indexing
-2. **Null/None checks** - missing validation for null values
-3. **Edge cases** - empty inputs, boundary conditions, negative numbers
-4. **Control flow** - unreachable code, infinite loops, missing break/return
-5. **Logic errors** - incorrect operators, wrong conditions, flawed assumptions
-6. **Race conditions** - concurrency issues if applicable
+Focus on these critical logic issues ONLY (skip if none found):
+1. **Division by zero** - calculations that could divide by 0
+2. **Null/None checks** - missing validation that could cause crashes
+3. **Edge cases** - empty inputs, boundary conditions (e.g., empty lists, zero values)
+4. **Off-by-one errors** in loops and array indexing
+5. **Unreachable code** or infinite loops
+
+BE CONSISTENT: Always return the same issues for the same code. Do not be creative or change your analysis between runs.
 
 For each issue found, return a JSON array with this exact structure:
 [
   {{
     "line": <line_number_relative_to_chunk>,
-    "severity": "critical" | "warning" | "info",
+    "severity": "critical",
     "message": "<clear, specific description of the issue>",
     "suggestion": "<concrete fix or recommendation>"
   }}
@@ -75,7 +76,7 @@ For each issue found, return a JSON array with this exact structure:
 
 If no issues found, return: []
 
-IMPORTANT: Return ONLY valid JSON, no markdown, no explanations."""
+IMPORTANT: Return ONLY valid JSON, no markdown formatting, no explanations, no code blocks."""
 
         return prompt
 

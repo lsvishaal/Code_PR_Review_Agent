@@ -31,16 +31,40 @@ def apply_custom_css():
             font-size: 1.1rem;
         }
         .critical-issue {
-            background-color: #f8d7da;
+            background-color: #1a1a2e;
             border-left: 4px solid #dc3545;
+            border-radius: 6px;
             padding: 1rem;
             margin: 0.5rem 0;
+            color: #ff6b6b;
+        }
+        .critical-issue strong {
+            color: #ff8787;
+            font-size: 1.05rem;
+        }
+        .critical-issue em {
+            color: #a0a0a0;
+            display: block;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
         .warning-issue {
-            background-color: #fff3cd;
+            background-color: #1a1a2e;
             border-left: 4px solid #ffc107;
+            border-radius: 6px;
             padding: 1rem;
             margin: 0.5rem 0;
+            color: #ffc107;
+        }
+        .warning-issue strong {
+            color: #ffd700;
+            font-size: 1.05rem;
+        }
+        .warning-issue em {
+            color: #a0a0a0;
+            display: block;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
         </style>
         """,

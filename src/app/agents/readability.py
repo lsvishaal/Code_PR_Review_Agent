@@ -47,19 +47,20 @@ CODE TO REVIEW:
 {code_context}
 ```
 
-Focus on:
-1. **Naming** - unclear variable/function names, inconsistent naming conventions
-2. **Function length** - functions that are too long or do too many things
-3. **Complexity** - deeply nested code, complex conditionals
-4. **Comments** - missing docstrings, outdated comments, over-commenting
-5. **Code organization** - poor structure, duplicate code
-6. **Magic numbers** - hardcoded values without explanation
+Focus on these readability issues ONLY (skip if none found):
+1. **Naming** - unclear variable/function names (e.g., single letters like a, b, c, temp, data)
+2. **Function length** - functions longer than 30 lines or doing multiple unrelated things
+3. **Complexity** - deeply nested code (>3 levels), complex conditionals
+4. **Documentation** - missing docstrings for functions/classes
+5. **Code organization** - duplicate code, poor structure, functions grouped illogically
+
+BE CONSISTENT: Always return the same issues for the same code. Do not be creative or change your analysis between runs.
 
 For each issue found, return a JSON array with this exact structure:
 [
   {{
     "line": <line_number_relative_to_chunk>,
-    "severity": "warning" | "info",
+    "severity": "warning",
     "message": "<clear description of the readability issue>",
     "suggestion": "<specific improvement recommendation>"
   }}
@@ -67,7 +68,7 @@ For each issue found, return a JSON array with this exact structure:
 
 If no issues found, return: []
 
-IMPORTANT: Return ONLY valid JSON, no markdown, no explanations."""
+IMPORTANT: Return ONLY valid JSON, no markdown formatting, no explanations, no code blocks."""
 
         return prompt
 

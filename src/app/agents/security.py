@@ -26,7 +26,7 @@ class SecurityAgent(BaseAgent):
         prompt = self._build_prompt(chunk)
 
         try:
-            response = await self._llm.generate(prompt, temperature=0.1, max_tokens=800)
+            response = await self._llm.generate(prompt, temperature=0.0, max_tokens=800)
             return self._parse_response(response, chunk)
         except Exception as e:
             logger.error("security_agent_error", error=str(e), file=chunk.file_path)
@@ -47,20 +47,20 @@ CODE TO REVIEW:
 {code_context}
 ```
 
-Focus on:
-1. **Injection** - SQL injection, command injection, code injection (OWASP A03)
-2. **Authentication** - weak auth, missing verification, password issues (OWASP A07)
-3. **Sensitive data** - hardcoded secrets, exposed credentials, logging sensitive info (OWASP A02)
-4. **Access control** - missing authorization checks, privilege escalation (OWASP A01)
-5. **Cryptography** - weak algorithms, poor key management, insecure random (OWASP A02)
-6. **Input validation** - unvalidated input, missing sanitization (CWE-20)
-7. **XSS/CSRF** - cross-site scripting, cross-site request forgery (OWASP A03)
+Focus on these critical security issues ONLY (skip if none found):
+1. **SQL Injection** - SQL queries with string interpolation (f-strings, concatenation)
+2. **Hardcoded credentials** - passwords, API keys, secrets in code
+3. **Command injection** - os.system(), subprocess with unsanitized input
+4. **Path traversal** - file operations with user input without validation
+5. **Insecure deserialization** - pickle.loads(), eval() on untrusted data
+
+BE CONSISTENT: Always return the same issues for the same code. Do not be creative or change your analysis between runs.
 
 For each security issue found, return a JSON array with this exact structure:
 [
   {{
     "line": <line_number_relative_to_chunk>,
-    "severity": "critical" | "warning",
+    "severity": "critical",
     "message": "<clear description of the security vulnerability>",
     "suggestion": "<specific remediation recommendation>"
   }}
@@ -68,7 +68,7 @@ For each security issue found, return a JSON array with this exact structure:
 
 If no issues found, return: []
 
-IMPORTANT: Return ONLY valid JSON, no markdown, no explanations."""
+IMPORTANT: Return ONLY valid JSON, no markdown formatting, no explanations, no code blocks."""
 
         return prompt
 

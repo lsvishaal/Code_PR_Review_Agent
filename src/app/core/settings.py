@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Application
-    app_name: str = "Lyzer PR Review Agent"
+    app_name: str = "CodeReview Agent"
     app_version: str = "0.1.0"
     debug: bool = False
 
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     github_token: str | None = None
     github_api_url: str = "https://api.github.com"
     github_timeout: float = 15.0
-    github_user_agent: str = "Lyzer-PR-Review-Agent/0.1.0"
+    github_user_agent: str = "CodeReview-Agent/0.1.0"
 
     # LLM / AI
     # Ollama (local, default)

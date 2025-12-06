@@ -1,4 +1,4 @@
-# Lyzer PR Review Agent 🤖
+# CodeReview Agent 🤖
 
 > **Automated GitHub PR Review Agent with Multi-Agent LLM System**
 
@@ -86,7 +86,7 @@ src/
 1. **Clone the repository**
 ```bash
 git clone <repo-url>
-cd Lyzer_PR_Review
+cd code-review-agent
 ```
 
 2. **Install UV** (if not already installed)
@@ -532,7 +532,7 @@ Configuration is managed through environment variables. See `.env.example` for a
 GITHUB_TOKEN=your_token_here          # Optional for public repos, required for private
 GITHUB_API_URL=https://api.github.com
 GITHUB_TIMEOUT=15.0
-GITHUB_USER_AGENT=Lyzer-PR-Review-Agent/0.1.0
+GITHUB_USER_AGENT=CodeReview-Agent/0.1.0
 
 # Ollama (Local LLM)
 OLLAMA_BASE_URL=http://ollama:11434   # Docker service name (use localhost:11434 for local dev)
@@ -623,7 +623,7 @@ uv run pre-commit install
 ## 📖 Project Structure
 
 ```
-Lyzer_PR_Review/
+code-review-agent/
 ├── src/
 │   └── app/
 │       ├── api/              # API endpoints
@@ -723,4 +723,4 @@ Contributions welcome! Please read our contributing guidelines first.
 
 ---
 
-**Built with ❤️ for the Lyzr Backend Intern Challenge**
+**Built with ❤️ as a personal learning project**

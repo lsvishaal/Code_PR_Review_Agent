@@ -23,7 +23,7 @@ class GitHubClientConfig:
     token: str | None
     base_url: str = "https://api.github.com"
     timeout: float = 15.0
-    user_agent: str = "Lyzer-PR-Review-Agent/0.1.0"
+    user_agent: str = "CodeReview-Agent/0.1.0"
 
 
 class GitHubClient:
@@ -34,7 +34,7 @@ class GitHubClient:
         token: str | None,
         base_url: str,
         timeout: float,
-        user_agent: str = "Lyzer-PR-Review-Agent/0.1.0",
+        user_agent: str = "CodeReview-Agent/0.1.0",
         transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         self._config = GitHubClientConfig(

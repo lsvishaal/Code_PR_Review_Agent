@@ -1,6 +1,6 @@
 # Code Practices & Principles Guide
 
-**For Automated GitHub PR Review Agent — Lyzr Backend Intern Challenge**
+**For Automated GitHub PR Review Agent**
 
 ---
 

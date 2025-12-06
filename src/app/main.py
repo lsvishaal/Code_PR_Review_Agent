@@ -30,7 +30,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 # Create FastAPI app
 app = FastAPI(
-    title="Lyzer PR Review Agent",
+    title="CodeReview Agent",
     description="Automated GitHub PR Review Agent with Multi-Agent LLM System",
     version="0.1.0",
     lifespan=lifespan,
@@ -57,7 +57,7 @@ app.include_router(review_router)
 async def root():
     """Root endpoint."""
     return {
-        "message": "Lyzer PR Review Agent API",
+        "message": "CodeReview Agent API",
         "version": "0.1.0",
         "status": "running",
     }

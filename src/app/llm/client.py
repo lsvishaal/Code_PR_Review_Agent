@@ -48,13 +48,16 @@ class LLMClient:
             "stream": False,
         }
 
-        # Add optional parameters
-        if temperature is not None or max_tokens is not None:
-            payload["options"] = {}
-            if temperature is not None:
-                payload["options"]["temperature"] = temperature
-            if max_tokens is not None:
-                payload["options"]["num_predict"] = max_tokens
+        # Add deterministic parameters for consistent outputs
+        payload["options"] = {
+            "temperature": temperature if temperature is not None else 0.0,
+            "seed": 42,  # Fixed seed for reproducibility
+            "top_p": 0.1,  # Low top_p for more deterministic outputs
+            "repeat_penalty": 1.1,  # Prevent repetition
+        }
+
+        if max_tokens is not None:
+            payload["options"]["num_predict"] = max_tokens
 
         response = await self._client.post("/api/generate", json=payload)
         response.raise_for_status()

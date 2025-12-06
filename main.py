@@ -1,5 +1,5 @@
 def main():
-    print("Hello from lyzer-pr-review!")
+    print("Hello from code-review-agent!")
 
 
 if __name__ == "__main__":
